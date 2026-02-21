@@ -19,23 +19,37 @@ export const App: React.FC = () => {
     }
 
     setGoods(data);
-  }
+  };
 
-  return <div className="App">
-    <h1>Dynamic list of Goods</h1>
+  return (
+    <div className="App">
+      <h1>Dynamic list of Goods</h1>
 
-    <button type="button" data-cy="all-button" onClick={() => loadData('getAll')}>
-      Load all goods
-    </button>
+      <button
+        type="button"
+        data-cy="all-button"
+        onClick={() => loadData('getAll')}
+      >
+        Load all goods
+      </button>
 
-    <button type="button" data-cy="first-five-button" onClick={() => loadData('getFiveFirst')}>
-      Load 5 first goods
-    </button>
+      <button
+        type="button"
+        data-cy="first-five-button"
+        onClick={() => loadData('getFiveFirst')}
+      >
+        Load 5 first goods
+      </button>
 
-    <button type="button" data-cy="red-button" onClick={() => loadData('getRed')}>
-      Load red goods
-    </button>
+      <button
+        type="button"
+        data-cy="red-button"
+        onClick={() => loadData('getRed')}
+      >
+        Load red goods
+      </button>
 
-    {goods && <GoodsList goods={goods} />}
-  </div>
+      {goods && <GoodsList goods={goods} />}
+    </div>
+  );
 };

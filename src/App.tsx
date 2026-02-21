@@ -6,19 +6,27 @@ import { Good } from './types/Good';
 
 export const App: React.FC = () => {
   const [goods, setGoods] = useState<Good[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const loadData = async (sortBy: string) => {
-    let data;
+    try {
+      setError(null);
 
-    if (sortBy === 'getFiveFirst') {
-      data = await get5First();
-    } else if (sortBy === 'getRed') {
-      data = await getRedGoods();
-    } else {
-      data = await getAll();
+      let data;
+
+      if (sortBy === 'getFiveFirst') {
+        data = await get5First();
+      } else if (sortBy === 'getRed') {
+        data = await getRedGoods();
+      } else {
+        data = await getAll();
+      }
+
+      setGoods(data);
+    } catch (err) {
+      setError('Failed to load data. Please try again later.');
+      setGoods(null);
     }
-
-    setGoods(data);
   };
 
   return (
@@ -48,7 +56,7 @@ export const App: React.FC = () => {
       >
         Load red goods
       </button>
-
+      {error && <p className="error">{error}</p>}
       {goods && <GoodsList goods={goods} />}
     </div>
   );

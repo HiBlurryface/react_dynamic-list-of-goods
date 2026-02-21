@@ -10,7 +10,7 @@ export function getAll(): Promise<Good[]> {
     } else {
       throw new Error('Failed to load goods' + response.status);
     }
-  })
+  });
 }
 
 export const get5First = () => {
